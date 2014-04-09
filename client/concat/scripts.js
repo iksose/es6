@@ -1,93 +1,60 @@
 "use strict";
-var $__0;
 var __moduleName = "scripts";
-var iterable = ($__0 = {}, Object.defineProperty($__0, Symbol.iterator, {
-  value: function() {
-    return $traceurRuntime.generatorWrap(function($ctx) {
-      while (true)
-        switch ($ctx.state) {
-          case 0:
-            $ctx.state = 2;
-            return 1;
-          case 2:
-            $ctx.maybeThrow();
-            $ctx.state = 4;
-            break;
-          case 4:
-            $ctx.state = 6;
-            return 2;
-          case 6:
-            $ctx.maybeThrow();
-            $ctx.state = 8;
-            break;
-          case 8:
-            $ctx.state = 10;
-            return 3;
-          case 10:
-            $ctx.maybeThrow();
-            $ctx.state = -2;
-            break;
-          default:
-            return $ctx.end();
-        }
-    }, this);
-  },
-  configurable: true,
-  enumerable: true,
-  writable: true
-}), $__0);
-for (var $__1 = iterable[$traceurRuntime.toProperty(Symbol.iterator)](),
-    $__2; !($__2 = $__1.next()).done; ) {
+console.log("hmm");
+var evens = [2, 4, 6, 8];
+var odds = evens.map((function(v) {
+  return v + 1;
+}));
+var nums = evens.map((function(v, i) {
+  return v + i;
+}));
+console.log("Nums", nums);
+var melter = function(obj) {
+  var temp = obj;
+  temp.melted = "melted";
+  return temp;
+};
+var empty = (function() {});
+var Car = function Car(make) {
+  this.make = make;
+  this.currentSpeed = 25;
+};
+($traceurRuntime.createClass)(Car, {printCurrentSpeed: function() {
+    console.log(this.make + ' is going ' + this.currentSpeed + ' mph.');
+  }}, {});
+var RaceCar = function RaceCar(make, topSpeed) {
+  $traceurRuntime.superCall(this, $RaceCar.prototype, "constructor", [make]);
+  this.topSpeed = topSpeed;
+};
+var $RaceCar = RaceCar;
+($traceurRuntime.createClass)(RaceCar, {goFast: function() {
+    this.currentSpeed = this.topSpeed;
+  }}, {}, Car);
+var stang = new RaceCar('Mustang', 150);
+var prius = new Car('Prius', 100);
+stang.printCurrentSpeed();
+stang.goFast();
+stang.printCurrentSpeed();
+prius.printCurrentSpeed();
+var num = 0;
+{
   try {
     throw undefined;
-  } catch (x) {
-    x = $__2.value;
-    {
-      console.log(x);
+  } catch ($i) {
+    $i = 0;
+    for (; $i < 10; $i++) {
+      try {
+        throw undefined;
+      } catch (i) {
+        i = $i;
+        try {
+          num += i;
+          console.log('value of i in block: ' + i);
+        } finally {
+          $i = i;
+        }
+      }
     }
   }
 }
-var a = ["We're up all night 'til the sun", "We're up all night to get some", "We're up all night for good fun", "We're up all night to get lucky"];
-var a2 = a.map(function(s) {
-  return s.length;
-});
-var a3 = a.map((function(s) {
-  return s.length;
-}));
-console.log(a3);
-function fibonacci() {
-  var $__5,
-      prev,
-      curr;
-  return $traceurRuntime.generatorWrap(function($ctx) {
-    while (true)
-      switch ($ctx.state) {
-        case 0:
-          $__5 = [0, 1], prev = $__5[0], curr = $__5[1];
-          $ctx.state = 9;
-          break;
-        case 9:
-          ($__5 = [curr, prev + curr], prev = $__5[0], curr = $__5[1], $__5);
-          $ctx.state = 6;
-          break;
-        case 6:
-          $ctx.state = 2;
-          return curr;
-        case 2:
-          $ctx.maybeThrow();
-          $ctx.state = 9;
-          break;
-        default:
-          return $ctx.end();
-      }
-  }, this);
-}
-for (var $__3 = fibonacci()[$traceurRuntime.toProperty(Symbol.iterator)](),
-    $__4; !($__4 = $__3.next()).done; ) {
-  word = $__4.value;
-  {
-    if (n > 1000)
-      break;
-    console.log(n);
-  }
-}
+console.log('Is i defined here?: ' + (typeof i !== 'undefined'));

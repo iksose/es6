@@ -1,45 +1,62 @@
-const iterable = {
-  *[Symbol.iterator]() {
-    yield 1;
-    yield 2;
-    yield 3;
-  }
+console.log("hmm")
+
+var evens = [2,4,6,8];
+var odds = evens.map(v => v + 1);
+var nums = evens.map((v, i) => v + i);
+
+console.log("Nums", nums)
+
+//let i = 9;
+
+//console.log(i)
+
+
+var melter = function(obj){
+  var temp = obj
+  temp.melted = "melted"
+  // return obj.melted = "melted"
+  return temp;
 }
-
-for (let x of iterable) {
-  console.log(x);
-}
-
-var a = [
-  "We're up all night 'til the sun",
-  "We're up all night to get some",
-  "We're up all night for good fun",
-  "We're up all night to get lucky"
-];
-
-var a2 = a.map(function(s){ return s.length });
-
-var a3 = a.map( s => s.length );
+let empty = () => {};
 
 
-console.log(a3)
+class Car {
+    constructor(make) { //constructors!
+      this.make = make;
+      this.currentSpeed = 25;
+    }
 
-
-function* fibonacci() {
-    let [prev, curr] = [0, 1];
-    for (;;) {
-        [prev, curr] = [curr, prev + curr];
-        yield curr;
+    printCurrentSpeed(){
+          console.log(this.make + ' is going ' + this.currentSpeed + ' mph.');
     }
 }
 
-for (word of fibonacci()) {
-    // truncate the sequence at 1000
-    if (n > 1000)
-        break;
-    console.log(n);
+class RaceCar extends Car { //inheritance
+    constructor(make, topSpeed) {
+        super(make); //call the parent constructor with super
+        this.topSpeed = topSpeed;
+    }
+
+    goFast(){
+          this.currentSpeed = this.topSpeed;
+    }
 }
 
-// let seq = fibonacci();
+let stang = new RaceCar('Mustang', 150);
+let prius = new Car('Prius', 100)
 
-// console.log(seq.next().value)
+stang.printCurrentSpeed();
+stang.goFast();
+stang.printCurrentSpeed();
+
+prius.printCurrentSpeed();
+
+
+var num = 0; //globally scoped
+
+for (let i = 0; i < 10; i++) { //i is block scoped
+  num += i;
+  console.log('value of i in block: ' + i);
+}
+
+console.log('Is i defined here?: ' + (typeof i !== 'undefined')); //Is i defined here?: false
